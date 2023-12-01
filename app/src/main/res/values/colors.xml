@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="sky">#def6ff</color>
+    <color name="deepSea">#7892d3</color>
 </resources>
