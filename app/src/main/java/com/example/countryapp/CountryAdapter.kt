@@ -4,9 +4,12 @@ import android.service.autofill.OnClickAction
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.countryapp.databinding.ItemCountryBinding
 
-class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class CountryAdapter(
+    val onClick:(country: Country, position: Int) -> Unit
+) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
     private val list = ArrayList<Country>()
 
@@ -19,6 +22,13 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
         fun bind(element: Country, position: Int) {
             binding.tvItem.text = element.name
             binding.dscrItem.text = element.description
+            binding.btnItem.setOnClickListener{
+                onClick(element, position)
+            }
+
+            Glide.with(binding.ivItem.context)
+                .load(element.imageResId)
+                .into(binding.ivItem)
         }
     }
 

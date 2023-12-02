@@ -18,7 +18,6 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -27,18 +26,17 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val list = ArrayList<Country>()
-        list.add(Country("Australia", "", R.drawable.Australia))
-        list.add(Country("France","", R.drawable.France))
-        list.add(Country("Italy", "", R.drawable.Italy))
-        list.add(Country("Singapore", "", R.drawable.Singapore))
-        list.add(Country("Ukraine", "", R.drawable.Ukraine))
+        list.add(Country("Australia", "Golden beaches and mystic mountains in nature's embrace", "Description about Australia", R.drawable.australia))
+        list.add(Country("France","Culinary finesse and art in harmony", "Description about France", R.drawable.france))
+        list.add(Country("Italy", "Winemaking tradition and refined culinary art", "Description about Italy", R.drawable.italy))
+        list.add(Country("Singapore", "Technological hub in the heart of Asia", "Description about Singapore", R.drawable.singapore))
+        list.add(Country("Ukraine", "Rich cultural heritage and hospitality", "Description about Ukraine", R.drawable.ukraine))
 
-        adapter = CountryAdapter()
+        adapter = CountryAdapter() { country, position ->
+            findNavController().navigate(FirstFragmentDirections.toSecondFragment(country.imageResId, country.name, country.info))
+        }
         adapter.setList(list)
         binding.rv.adapter = adapter
 
-        binding.btnToSecond.setOnClickListener{
-            findNavController().navigate(FirstFragmentDirections.toSecondFragment("some dkfdskfjgdf"))
-        }
     }
 }
